@@ -2,7 +2,7 @@ import React from "react";
 import Btn from "./btn/Btn";
 import { StyledKeypad, Wrapper } from "./Keypad.styles";
 
-const Keypad = ({ handleDigit }) => {
+const Keypad = ({ handleClick }) => {
   const calculatorKeys = [
     { id: "key-7", value: "7", type: "digit" },
     { id: "key-8", value: "8", type: "digit" },
@@ -26,7 +26,7 @@ const Keypad = ({ handleDigit }) => {
 
   return (
     <Wrapper>
-      <StyledKeypad onClick={handleDigit}>
+      <StyledKeypad onClick={handleClick}>
         {calculatorKeys.map(({ ...props }) => (
           <Btn key={props.id} {...props} />
         ))}

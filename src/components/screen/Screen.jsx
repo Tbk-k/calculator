@@ -5,7 +5,7 @@ const Screen = ({ result }) => {
   return (
     <Wrapper>
       <StyledScreen>
-        <p>{result}</p>
+        <input type="text" value={result} disabled maxLength={10} />
       </StyledScreen>
     </Wrapper>
   );

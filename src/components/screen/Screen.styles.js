@@ -14,9 +14,14 @@ export const StyledScreen = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
-  p {
+  input {
     font-size: 50px;
+    width: 100%;
     color: ${({ theme }) => theme.screen.color};
     font-weight: bold;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    text-align: end;
   }
 `;
