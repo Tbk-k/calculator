@@ -3,7 +3,12 @@ export const handleDisplay = (key, state, stateFnc) => {
   let num;
   if (firstNum === "0" && secondNum === "0") {
     stateFnc((prev) => ({ ...prev, firstNum: key }));
-  } else if (firstNum != "0" && operator && secondNum === "0") {
+  } else if (
+    firstNum != "0" &&
+    operator &&
+    secondNum === "0" &&
+    operator != "."
+  ) {
     if (operator === "=") {
       stateFnc({ firstNum: key, secondNum: "0", operator: null });
     } else {
@@ -57,13 +62,13 @@ export const handleOperators = (key, state, stateFnc) => {
   } else if (firstNum != "0" && secondNum != "0" && operator) {
     result = math(firstNum, secondNum, operator);
     stateFnc({ firstNum: result, secondNum: "0", operator: key });
-  } else if (firstNum != "0" && operator === "=") {
+  } else if ((firstNum != "0" && operator === "=") || operator === ".") {
     stateFnc((prev) => ({ ...prev, operator: key }));
   }
 };
 
 export const handleOther = (key, state, stateFnc) => {
-  let { firstNum } = state;
+  let { firstNum, operator } = state;
   if (key === "reset") {
     stateFnc({ firstNum: "0", secondNum: "0", operator: null });
   } else if (key === "del") {
@@ -72,5 +77,14 @@ export const handleOther = (key, state, stateFnc) => {
       ...prev,
       firstNum: value,
     }));
+  } else if (key === ".") {
+    if (!firstNum.includes(".")) {
+      operator = operator === "=" ? "." : operator;
+      stateFnc((prev) => ({
+        ...prev,
+        firstNum: prev.firstNum + ".",
+        operator: operator,
+      }));
+    }
   }
 };
